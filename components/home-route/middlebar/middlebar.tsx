@@ -9,8 +9,9 @@ export default async function MiddleBar() {
 <ul className="grid  sm:grid-cols-3 grid-cols-3 md:grid-cols-4 sm:gap-8 gap-4 ">
 
 {data.map((e)=>(
-  <ContainerCard id={e.id} name={e.name} imgUrl={e.url}/>))}
-
+  <li key={e.id}>
+  <ContainerCard id={e.id} name={e.name} imgUrl={e.url}/></li>))}
+  
 </ul>
     </section>
   )

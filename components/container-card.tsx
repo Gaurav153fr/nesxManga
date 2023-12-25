@@ -14,7 +14,7 @@ export default function ContainerCard({id,name,imgUrl}:cardType) {
    const randomColor = colors[Math.floor(Math.random() * colors.length)];
  
   return (
-    <li>
+    <div>
     <Link href={linkPath}>
        <div>
          <div className="sm:h-52 h-40  overflow-hidden ">
@@ -40,6 +40,6 @@ export default function ContainerCard({id,name,imgUrl}:cardType) {
       </h3>
       </div>
       </div></Link>
-  </li>
+  </div>
   )
 }
