@@ -28,7 +28,7 @@ export default function RightSidebar({ mangaId }: { mangaId: string }) {
   };
 
   return (
-    <div className="p-5 h-screen fixed bg-[--border-dark] border-l-2 border-l-slate-700">
+    <div className="p-5 h-screen fixed  border-l-2 border-l-slate-700">
       <div className="flex justify-between">
         <Link href="/" className="hover:underline">
           Back
@@ -36,7 +36,7 @@ export default function RightSidebar({ mangaId }: { mangaId: string }) {
         {data.url && data.id ? (
           <AddCollectionButton imgUrl={data.url} link={`/${mangaId}/${data.name?.replaceAll(' ', '-')}`} id={mangaId} />
         ) : (
-          <>Something unexpected happened</>
+          <p>Loading...</p>
         )}
       </div>
 

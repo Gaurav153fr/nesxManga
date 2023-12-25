@@ -11,13 +11,13 @@ interface BtnProps {
     if (variant === 'primary') {
       buttonClassName += ' text-black bg-white'; // Add primary button classes here
     } else if (variant === 'secondary') {
-        buttonClassName+=' text-white bg-red-600'
+        buttonClassName+=' text-red-600 '
       // Add secondary button classes here
       // Example: buttonClassName += ' text-blue-500'; // Add secondary color
     }
   
     return (
-      <button onClick={onClick} className={buttonClassName}>
+      <button onClick={onClick} className={buttonClassName} type="button">
         <span className="px-1 text-nowrap text-sm">{text}</span>
       </button>
     );
