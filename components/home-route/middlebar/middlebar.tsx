@@ -6,7 +6,7 @@ export default async function MiddleBar() {
     <section className=" ml-6 mr-5 h-screen overflow-y-scroll no-scrollbar">
     <h3 className=" font-extrabold my-4 text-orange-600 text-lg">Popular:</h3>
 
-<ul className="grid  sm:grid-cols-3 grid-cols-3 md:grid-cols-4 sm:gap-8 gap-4 ">
+<ul className="grid  sm:grid-cols-3 grid-cols-2 md:grid-cols-4 sm:gap-8 gap-4 ">
 
 {data.map((e)=>(
   <li key={e.id}>
