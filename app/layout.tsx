@@ -20,12 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className='flex w-full  '>
+        <div className='flex w-full   '>
         <LeftSideBar/>
-        <section className="w-full flex">
+        <section className=" flex w-full  ">
         <div>{home}</div>
-        <div>{children}</div>
-        <div className='w-full sm:relative fixed bottom-0 sm:right-0'>{details}</div>
+        {children}
+        <div className='w-full  overflow-hidden'>{details}</div>
         </section>
         
         

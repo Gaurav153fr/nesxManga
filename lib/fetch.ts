@@ -2,22 +2,23 @@ async function fethManga(url:string){
    const res= await fetch(url)
    return res.json()
 }
-type Mg={
-    id:string,
-    name:string|null,
-    url:string|null,
-}
+
 async function getimgs(){
-    var imgUrl:Mg[]=[]
-    const url="https://api.jikan.moe/v4/top/manga"
-const data:MangaResponse = await fethManga(url)
-const imgs = data.data
-imgs.forEach((img)=>{
-    const p:Mg= {
-        id:img.mal_id.toString(),
-        name:img.title,
-        url:img.images.webp.image_url
+    var imgUrl:cardData[]=[]
+    const url="https://api.flixscans.org/api/v1/search/advance"
+const res:SeriesJSONManhwas = await fethManga(url)
+const data = res.data
+const mediaUrl = "https://media.flixscans.org/"
+data.forEach((d)=>{
+    const p:cardData= {
+        id:d.id.toString(),
+        name:d.title,
+        url:mediaUrl + (d.thumbSize.large),
+        views:d.totalViews,
+        lastChapter:d.lastChapter,
+        genre:d.mainGenres
     }
+    
     imgUrl.push(p)
 })
 return imgUrl
@@ -25,15 +26,30 @@ return imgUrl
 
 async function getById(mangaId:string) {
     //var imgUrl:Mg[]=[]
-    const url ="https://api.jikan.moe/v4/manga/"+mangaId
-    const res:MangaDataResponse = await fethManga(url)
-  const data= res.data
-    const dataObj:sideBarData ={
-        id:data.mal_id.toString(),
+    const url ="https://api.flixscans.org/api/v1/webtoon/series/"+mangaId
+    const res:SeriesResponse = await fethManga(url)
+  const data= res.serie
+  const mediaUrl = "https://media.flixscans.org/"
+
+    const dataObj:infoData ={
+    id:data.id,
     name:data.title,
-    url:data.images.webp.image_url,
-    synopsis:data.synopsis,
+    url:mediaUrl+data.thumbSize.small,
+    synopsis:data.story,
+slug:data.slug,
+status:data.status,
+mainGenre:data.mainGenres,
+genres:data.genres
     }
     return dataObj
 }
-export  {getimgs,getById}
+
+async function getChapterList(mangaId:string) {
+    //var imgUrl:Mg[]=[]
+    const url ="https://api.flixscans.org/api/v1/webtoon/chapters/38"+mangaId+"-desc"
+    const res:ChapterData = await fethManga(url)
+  const data= res
+console.log(data,"vsfffffffffffffffffffffffffffffffffhj")
+    return data
+}
+export  {getimgs,getById,getChapterList}

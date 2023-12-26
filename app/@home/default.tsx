@@ -1,6 +1,6 @@
 import MiddleBar from "@/components/home-route/middlebar/middlebar"
 export default function AllList() {
   return (
-    <div><MiddleBar/></div>
+    <section className="w-full "><MiddleBar/></section>
   )
 }
