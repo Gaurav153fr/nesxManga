@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AddCollectionButton from './AddCollectionButton';
 import { getById, getChapterList } from '@/lib/fetch';
+import ChapterListItem from './chapter-list-item';
 // ... (your imports)
 // import necessary modules and components
 
-export default function RightSidebar({ mangaId }: { mangaId: string }) {
+export default function RightSidebar({ mangaId,series }: { mangaId: string,series:string }) {
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
   const [data, setData] = useState<infoData>(); // Assuming data will be of 
   const [chapters, setChapters] = useState<ChapterData>();
@@ -18,6 +19,7 @@ export default function RightSidebar({ mangaId }: { mangaId: string }) {
         setData(fetchedData);
         const fetchChapters = await getChapterList(mangaId);
         setChapters(fetchChapters);
+        
       } catch (error) {
         console.error('Error fetching data:', error);
         // Handle error if necessary
@@ -53,11 +55,9 @@ export default function RightSidebar({ mangaId }: { mangaId: string }) {
 
             <h3 className="font-extrabold m-auto  text-black  bg-gray-50   text-center mt-5  px-1">{data.name}</h3>
 
-            <h3 className=" font-bold  mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">
-              Author
-            </h3>
-            <h3 className=" font-bold text-black  bg-cyan-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">c
-             @gsdvjg
+           
+            <h3 className=" font-bold text-black  bg-cyan-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">
+             by @{data.author}
             </h3>
 
             <h3 className="font-extrabold text-black  bg-amber-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer" onClick={toggleSynopsis}>
@@ -81,12 +81,15 @@ export default function RightSidebar({ mangaId }: { mangaId: string }) {
                 </h3>
               ))}
             </div>
-
+            <h3 className=" font-bold  mt-5 mb-2 px-1 ">
+              Chapters:
+            </h3>
             <section>
               {chapters ? (
-                <ul>
+                <ul className='h-60 bg-black overflow-y-scroll py-5 border-2 border-gray-700 no-scrollbar'>
                   {chapters.map((chapter, index) => (
-                    <li key={index}><Link href={'#'}>{chapter.name}</Link></li>
+                    <li key={index}><ChapterListItem chapter={chapter.name} url={chapter.thumbnail} series={series} 
+                    chapterId={chapter.id}/></li>
                   ))}
                 </ul>
               ) : (

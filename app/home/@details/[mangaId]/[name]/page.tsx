@@ -7,7 +7,7 @@ export default function Details({
   } ) {
   return (
     <div className=" w-100 h-screen   bg-[#1e1f22] overflow-y-scroll ">
-      <RightSidebar mangaId={params.mangaId}/>
+      <RightSidebar mangaId={params.mangaId} series={params.name}/>
     </div>
   )
 }

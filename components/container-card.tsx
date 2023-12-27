@@ -8,6 +8,7 @@ interface CardData {
   views: number;
   lastChapter?: { name: string };
   genre?: string;
+  slug:string
 }
 
 export default function ContainerCard({
@@ -16,9 +17,9 @@ export default function ContainerCard({
   url,
   views,
   lastChapter,
-  genre,
+  slug
 }: CardData) {
-  const linkPath: string = `/${id}/${name?.replaceAll(" ", "-")}`;
+  const linkPath: string = `home/${id}/${slug}`;
   const chapterPath = "/";
 
   return (

@@ -7,6 +7,7 @@ async function getimgs(){
     var imgUrl:cardData[]=[]
     const url="https://api.flixscans.org/api/v1/search/advance"
 const res:SeriesJSONManhwas = await fethManga(url)
+
 const data = res.data
 const mediaUrl = "https://media.flixscans.org/"
 data.forEach((d)=>{
@@ -16,9 +17,9 @@ data.forEach((d)=>{
         url:mediaUrl + (d.thumbSize.large),
         views:d.totalViews,
         lastChapter:d.lastChapter,
-        genre:d.mainGenres
+        genre:d.mainGenres,
+        slug:d.slug
     }
-    
     imgUrl.push(p)
 })
 return imgUrl
@@ -39,17 +40,27 @@ async function getById(mangaId:string) {
 slug:data.slug,
 status:data.status,
 mainGenre:data.mainGenres,
-genres:data.genres
+genres:data.genres,
+author:data.authors[0].name
     }
+    //console.log(dataObj)
     return dataObj
 }
 
 async function getChapterList(mangaId:string) {
     //var imgUrl:Mg[]=[]
-    const url ="https://api.flixscans.org/api/v1/webtoon/chapters/38"+mangaId+"-desc"
+    const url ="https://api.flixscans.org/api/v1/webtoon/chapters/"+mangaId+"-desc"
     const res:ChapterData = await fethManga(url)
   const data= res
-console.log(data,"vsfffffffffffffffffffffffffffffffffhj")
     return data
 }
-export  {getimgs,getById,getChapterList}
+async function getChapterData(Id:number) {
+    //var imgUrl:Mg[]=[]
+    const url ="https://api.flixscans.org/api/v1/webtoon/chapters/chapter/"+Id.toString()
+
+    const res:ChapterResponse = await fethManga(url)
+  const data:Chapter= res.chapter
+ console.log(url,res,data)
+    return data
+}
+export  {getimgs,getById,getChapterList,getChapterData}

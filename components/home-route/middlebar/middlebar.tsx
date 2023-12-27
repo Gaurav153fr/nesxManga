@@ -25,6 +25,7 @@ export default async function MiddleBar() {
                 genre={e.genre}
                 views={e.views}
                 lastChapter={e.lastChapter}
+                slug={e.slug}
               />
             </li>
           ))

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,details,home
+  children
 }: {
   children: React.ReactNode,
   details:React.ReactNode,
@@ -21,11 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className='flex w-full   '>
-        <LeftSideBar/>
+          <div className='w-20 h-screen'>
+        <LeftSideBar/></div>
         <section className=" flex w-full  ">
-        <div>{home}</div>
+       
         {children}
-        <div className='w-full  overflow-hidden'>{details}</div>
         </section>
         
         
