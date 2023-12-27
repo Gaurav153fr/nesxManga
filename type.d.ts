@@ -5,6 +5,7 @@ type cardData={
   views:number,
   lastChapter:LastChapter,
   genre:string,
+  slug:string
 }
 type infoData={
   id:number,
@@ -14,7 +15,8 @@ type infoData={
   slug:string,
   status:string,
   mainGenre:string,
-  genres: { id: number; name: string; slug: string }[]
+  genres: { id: number; name: string; slug: string }[],
+  author:string
 }
 
 interface ChapterInfo {
@@ -29,6 +31,52 @@ interface ChapterInfo {
 }
 
 type ChapterData = ChapterInfo[];
+
+type Chapter = {
+  id: number;
+  name: string;
+  title: string | null;
+  slug: string;
+  storage: string;
+  commentOpen: boolean;
+  published: boolean;
+  views: number;
+  thumbnail: string;
+  createdAt: string;
+  previous: {
+    id: number;
+    slug: string;
+  } | null;
+  next: {
+    id: number;
+    slug: string;
+  } | null;
+  serie: {
+    id: number;
+    title: string;
+    slug: string;
+    prefix: number;
+    story: string;
+    thumbnail: string;
+    chapterThumbnail: string | null;
+    mainGenres: string;
+    type: string;
+    serieType: string;
+    totalViews: number;
+    refreshAt: string;
+  };
+  chapterData: {
+    id: number;
+    chapterId: number;
+    webtoon: string[];
+  };
+}
+
+type ChapterResponse = {
+  status: boolean;
+  message: string;
+  chapter: Chapter;
+}
 
 
 interface ThumbnailSizes {

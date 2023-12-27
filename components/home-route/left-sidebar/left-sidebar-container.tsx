@@ -38,13 +38,13 @@ export default function LeftSideBar(): JSX.Element {
   };
 
   return (
-    <div className='pr-1  py-5 bg-[#1e1f22] border-r-2 border-gray-600 h-screen'>
-      <Link className='bg-cyan-600 px-1 hover:underline' href="/">/Home</Link>
+    <div className='pr-1  py-5 bg-[#1e1f22] border-r-2 border-gray-600 h-screen fixed'>
+      <Link className='bg-cyan-600 px-1 hover:underline' href="/home">/Home</Link>
       {collection.map((item, index) => (
         <SideBarItem
           key={index}
           imgUrl={item.imgUrl}
-          link={item.link}
+          link={"/home/"+item.link}
           isActive={index === activeIndex}
           onClick={() => handleItemClick(index)} // Pass a click handler to update activeIndex
         />
