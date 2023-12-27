@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface CardData {
-  id: number;
+  id: string;
   name?: string;
   url?: string;
   views: number;
@@ -23,7 +23,7 @@ export default function ContainerCard({
 
   return (
     <div className="">
-      <Link href={linkPath}
+      <div 
          className="block w-50 h-52 ">
           <div className="sm:h-40 h-[300] w-50 overflow-hidden">
             {url ? (
@@ -39,9 +39,9 @@ export default function ContainerCard({
             )}
           </div>
 
-          <p className="bg-orange-700 font-bold text-md text-black w-full px-1 text-ellipsis line-clamp-1 hover:underline">
+          <Link href={linkPath} className="bg-orange-700 font-bold text-md text-black w-full px-1 text-ellipsis line-clamp-1 hover:underline">
             {name}
-          </p>
+          </Link>
 
           <div className="flex h-5 items-center justify-around">
             {lastChapter ? (
@@ -57,7 +57,7 @@ export default function ContainerCard({
            
           </div>
        
-      </Link>
+      </div>
     </div>
   );
 }
