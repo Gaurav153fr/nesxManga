@@ -1,45 +1,63 @@
-import Link from "next/link"
-import Image from "next/image"
-type cardType={
-    id:string,
-    name:string|null,
-    imgUrl:string|null,
-}
-export default function ContainerCard({id,name,imgUrl}:cardType) {
-  const  linkPath:string =`/${id}/${name?.replaceAll(" ","-")}`
-   // Array of predefined colors
-   const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33B8', '#33FFFF', '#FF33FF', '#FFFF33', '#333333'];
+import Link from "next/link";
+import Image from "next/image";
 
-   // Get a random color from the colors array
-   const randomColor = colors[Math.floor(Math.random() * colors.length)];
- 
+interface CardData {
+  id: number;
+  name?: string;
+  url?: string;
+  views: number;
+  lastChapter?: { name: string };
+  genre?: string;
+}
+
+export default function ContainerCard({
+  id,
+  name,
+  url,
+  views,
+  lastChapter,
+  genre,
+}: CardData) {
+  const linkPath: string = `/${id}/${name?.replaceAll(" ", "-")}`;
+  const chapterPath = "/";
+
   return (
-    <div>
-    <Link href={linkPath}>
-       <div>
-         <div className="sm:h-52 h-40  overflow-hidden ">
-            {imgUrl?
-    (<Image className="  hover:brightness-100  brightness-75"
-            src={imgUrl}
-            alt={name?(name):("Image not found")}
-            height={320}
-            width={225}/>):(<span>Image not found</span>)}
+    <div className="">
+      <Link href={linkPath}
+         className="block w-50 h-52 ">
+          <div className="sm:h-40 h-[300] w-50 overflow-hidden">
+            {url ? (
+              <Image
+                className="hover:brightness-100 brightness-90 object-cover"
+                src={url}
+                alt={name ? name : "Image not found"}
+                height={450}
+                width={300}
+              />
+            ) : (
+              <span>Image not found</span>
+            )}
+          </div>
+
+          <p className="bg-orange-700 font-bold text-md text-black w-full px-1 text-ellipsis line-clamp-1 hover:underline">
+            {name}
+          </p>
+
+          <div className="flex h-5 items-center justify-around">
+            {lastChapter ? (
+              <Link href={chapterPath}
+                 className="px-1 px-auto text-center text-nowrap text-black text-xs bg-green-600 shadow-lg hover:underline flex justify-between cursor-pointer flex-grow">
+                  Ch {lastChapter.name}
+                
+              </Link>
+            ) : null}
+            <h3 className="text-center text-nowrap text-black bg-cyan-600 text-xs shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-full">
+              {views} views 
+            </h3>
+           
+          </div>
+       
+      </Link>
     </div>
-    
-    <p className="bg-orange-700 text-black w-full px-1 text-ellipsis line-clamp-1 hover:underline ">
-        {name}</p>
-        <div className="flex w-full">
-        <h3 className=" font-bold text-black  bg-green-600  shadow-lg px-1 hover:underline flex justify-between cursor-pointer flex-grow">
-        ∑43
-      </h3>
-      <h3 className=" font-bold text-black  bg-cyan-600 shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-full">
-        5 ✪
-      </h3>
-      <h3 className=" font-bold text-black bg-amber-600  px-1 hover:underline flex justify-between cursor-pointer w-full">
-        @mota
-      </h3>
-      </div>
-      </div></Link>
-  </div>
-  )
+  );
 }
