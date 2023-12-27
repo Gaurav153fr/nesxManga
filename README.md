@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Progress
+[x] Discord like Sidebar
+[x] Parallel routing for quick peek view of manga 
+[x] Sneak peek right sideBar 👁️📑
+[] Displaying Chapters 📄 
+[] User Authentication 👤
+[] Mobile responsive 📱
 ## Getting Started
 
 First, run the development server:
