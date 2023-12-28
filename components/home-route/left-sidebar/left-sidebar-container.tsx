@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import SideBarItem from './left-sidebar-fav-item';
+import React, { useState, useEffect } from "react";
+import SideBarItem from "./left-sidebar-fav-item";
 interface CollectionDataType {
   imgUrl: string;
   link: string;
@@ -12,7 +12,7 @@ export default function LeftSideBar(): JSX.Element {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const dataString = localStorage.getItem('UserCollectionObject');
+      const dataString = localStorage.getItem("UserCollectionObject");
       if (dataString) {
         const data: CollectionDataType[] = JSON.parse(dataString);
         setCollection(data);
@@ -20,14 +20,14 @@ export default function LeftSideBar(): JSX.Element {
     };
 
     // Listen for changes in localStorage
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
 
     // Initial load of collection from localStorage
     handleStorageChange();
 
     return () => {
       // Cleanup - remove the event listener
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
@@ -37,7 +37,7 @@ export default function LeftSideBar(): JSX.Element {
   };
 
   return (
-    <div className='  h-screen fixed overflow-y-scroll no-scrollbar'>
+    <div className="  h-screen fixed overflow-y-scroll no-scrollbar bg-gray-900">
       {collection.map((item, index) => (
         <SideBarItem
           key={index}

@@ -1,9 +1,8 @@
 import { getimgs } from "@/lib/fetch";
 import ContainerCard from "@/components/container-card";
-
 export default async function MiddleBar() {
   let data = null;
-  
+
   try {
     data = await getimgs();
   } catch (error) {
@@ -11,12 +10,11 @@ export default async function MiddleBar() {
   }
 
   return (
-    <section className="px-2 h-screen overflow-y-scroll no-scrollbar w-full">
-            <h3 className="font-extrabold my-4 mt-20 text-5xl">Hello User 👋</h3>
-
+    <section className="pl-1 h-screen overflow-y-scroll no-scrollbar w-fit ">
+      <h3 className="font-extrabold my-4 mt-20 text-5xl">Hello User 👋</h3>
       <h3 className="font-extrabold my-4  text-xl">Today in popular</h3>
 
-      <ul className="grid sm:grid-cols-3 grid-cols-2 md:grid-cols-4 gap-4">
+      <ul className="grid sm:grid-cols-3 grid-cols-2 md:grid-cols-4 gap-4 gap-y-1">
         {data ? (
           data.map((e) => (
             <li key={e.id}>
