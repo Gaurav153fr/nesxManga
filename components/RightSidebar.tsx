@@ -15,7 +15,6 @@ export default function RightSidebar({
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
   const [data, setData] = useState<infoData>(); // Assuming data will be of
   const [chapters, setChapters] = useState<ChapterData>();
-  const [isfull, setisfull] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,15 +35,9 @@ export default function RightSidebar({
   const toggleSynopsis = () => {
     setIsSynopsisOpen(!isSynopsisOpen);
   };
-  const toggleheight = () => {
-    setisfull(!isfull);
-  };
-  return (
-    <div className=" h-screen w-80 mr-15 pr-15 sm:bg-gray-900">
-      <button onClick={toggleheight} className="hover:underline">
-        {isfull ? <span>Hide</span> : <span>Show</span>}
-      </button>
 
+  return (
+    <div className=" h-screen w-full mr-15 pr-15 sm:bg-gray-900 overflow-y-scroll  ">
       <div className="">
         {data ? (
           <div className="  no-scrollbar w-full  p-5">
