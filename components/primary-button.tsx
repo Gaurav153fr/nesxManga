@@ -5,11 +5,11 @@ interface BtnProps {
   }
   
   export default function PButton({ onClick, text, variant = 'primary' }: BtnProps) {
-    let buttonClassName = 'bg-white w-32 h-10';
+    let buttonClassName = ' p-1';
   
     // Apply different classes based on the variant
     if (variant === 'primary') {
-      buttonClassName += ' text-black bg-white'; // Add primary button classes here
+      buttonClassName += ' text-black'; // Add primary button classes here
     } else if (variant === 'secondary') {
         buttonClassName+=' text-red-600 '
       // Add secondary button classes here

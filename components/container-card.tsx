@@ -19,7 +19,7 @@ export default function ContainerCard({
   lastChapter,
   slug
 }: CardData) {
-  const linkPath: string = `home/${id}/${slug}`;
+  const linkPath: string = `/${id}/${slug}`;
   const chapterPath = "/";
 
   return (
