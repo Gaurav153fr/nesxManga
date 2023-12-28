@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import LeftSideBar from "@/components/home-route/left-sidebar/left-sidebar-container";
-import BackForth from "@/components/back-forth";
 import Details from "@/components/dd";
 const inter = Poppins({ subsets: ["latin"], weight: "400" });
 export const metadata: Metadata = {
@@ -24,17 +23,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex w-full">
           <section className=" flex w-full ">
-            <div className=" border-gray-600 w-40 h-screen">
+            <div className=" border-gray-600 w-fit h-screen">
               <LeftSideBar />
             </div>
-            <BackForth />
             <Details>
-              <div className="flex w-full flex-row">
-                <div className=" w-screen sm:w-1/3  h-screen pr-20 pl-2 sm:pr-4">
-                  {serieslist}
-                </div>
-                <div className="w-screen sm:w-80  h-screen ">{details}</div>
+              <div className=" w-screen  sm:w-1/3  h-screen   pl-2 sm:pr-4">
+                {serieslist}
               </div>
+              <div className="w-screen sm:w-80  h-screen">{details}</div>
             </Details>
           </section>
         </div>

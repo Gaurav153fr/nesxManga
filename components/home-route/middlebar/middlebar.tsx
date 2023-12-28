@@ -10,7 +10,7 @@ export default async function MiddleBar() {
   }
 
   return (
-    <section className="pl-1 h-screen overflow-y-scroll no-scrollbar w-fit ">
+    <section className=" h-screen overflow-y-scroll no-scrollbar w-full px-5 ">
       <h3 className="font-extrabold my-4 mt-20 text-5xl">Hello User 👋</h3>
       <h3 className="font-extrabold my-4  text-xl">Today in popular</h3>
 
