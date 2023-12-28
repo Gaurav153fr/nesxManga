@@ -1,14 +1,21 @@
-"use client"
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import AddCollectionButton from './AddCollectionButton';
-import { getById, getChapterList } from '@/lib/fetch';
-import ChapterListItem from './chapter-list-item';
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import AddCollectionButton from "./AddCollectionButton";
+import { getById, getChapterList } from "@/lib/fetch";
+import ChapterListItem from "./chapter-list-item";
 
-export default function RightSidebar({ mangaId,series }: { mangaId: string,series:string }) {
+export default function RightSidebar({
+  mangaId,
+  series,
+}: {
+  mangaId: string;
+  series: string;
+}) {
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
-  const [data, setData] = useState<infoData>(); // Assuming data will be of 
+  const [data, setData] = useState<infoData>(); // Assuming data will be of
   const [chapters, setChapters] = useState<ChapterData>();
+  const [isfull, setisfull] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,9 +24,8 @@ export default function RightSidebar({ mangaId,series }: { mangaId: string,serie
         setData(fetchedData);
         const fetchChapters = await getChapterList(mangaId);
         setChapters(fetchChapters);
-        
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         // Handle error if necessary
       }
     };
@@ -30,64 +36,87 @@ export default function RightSidebar({ mangaId,series }: { mangaId: string,serie
   const toggleSynopsis = () => {
     setIsSynopsisOpen(!isSynopsisOpen);
   };
-
+  const toggleheight = () => {
+    setisfull(!isfull);
+  };
   return (
-    <div className="bg-gray-700/50 w-full ">
-      <div className=''> 
+    <div className=" h-screen w-80 mr-15 pr-15 sm:bg-gray-900">
+      <button onClick={toggleheight} className="hover:underline">
+        {isfull ? <span>Hide</span> : <span>Show</span>}
+      </button>
+
+      <div className="">
         {data ? (
-          <div className=' py-5 no-scrollbar w-100  p-5'>
+          <div className="  no-scrollbar w-full  p-5">
             <div className="flex justify-between">
-              <Link href="/" className="hover:underline">
-                Back
-              </Link>
               {data.url && data.id ? (
-                <AddCollectionButton imgUrl={data.url} link={`/${mangaId}/${data.name?.replaceAll(' ', '-')}`} id={mangaId} />
+                <AddCollectionButton
+                  imgUrl={data.url}
+                  link={`/${mangaId}/${data.name?.replaceAll(" ", "-")}`}
+                  id={mangaId}
+                />
               ) : (
                 <p>Loading...</p>
               )}
             </div>
 
             <div className="h-16 w-16 m-auto mt-5 rounded-full overflow-hidden">
-              {data.url ? <img src={data.url} alt="title-thumbnail" width={64} height={64} /> : null}
+              {data.url ? (
+                <img
+                  src={data.url}
+                  alt="title-thumbnail"
+                  width={64}
+                  height={64}
+                />
+              ) : null}
             </div>
 
-            <h3 className="font-extrabold m-auto text-xl   text-center mt-5  px-1 w-1/2">{data.name}</h3>
-
-           
-            <h3 className=" font-bold text-black  bg-cyan-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">
-             by @{data.author}
+            <h3 className="font-extrabold m-auto text-xl   text-center mt-5  px-1 w-1/2">
+              {data.name}
             </h3>
 
-            <h3 className="font-extrabold text-black  bg-amber-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer" onClick={toggleSynopsis}>
+            <h3 className=" font-bold text-black  bg-cyan-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">
+              by @{data.author}
+            </h3>
+
+            <h3
+              className="font-extrabold text-black  bg-amber-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer"
+              onClick={toggleSynopsis}
+            >
               Synopsis :<span>⤵</span>
             </h3>
             <div
               className={`text-gray-200 overflow-y-scroll transition-all duration-500 ease-in-out border-2 border-gray-700 p-1 ${
-                isSynopsisOpen ? 'max-h-[200px]' : 'max-h-0 opacity-0'
+                isSynopsisOpen ? "max-h-[200px]" : "max-h-0 opacity-0"
               }`}
             >
               {data.synopsis}
             </div>
 
-            <h3 className=" font-bold  mt-5 mb-2 px-1 ">
-              Genre
-            </h3>
-            <div className='flex gap-2  flex-wrap w-full'>
+            <h3 className=" font-bold  mt-5 mb-2 px-1 ">Genre</h3>
+            <div className="flex gap-2  flex-wrap w-full">
               {data.genres.map((genre) => (
-                <h3 key={genre.id} className=" font-bold text-black  bg-blue-400  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">
+                <h3
+                  key={genre.id}
+                  className=" font-bold text-black  bg-blue-400  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit"
+                >
                   #{genre.name}
                 </h3>
               ))}
             </div>
-            <h3 className=" font-bold  mt-5 mb-2 px-1 ">
-              Chapters:
-            </h3>
+            <h3 className=" font-bold  mt-5 mb-2 px-1 ">Chapters:</h3>
             <section>
               {chapters ? (
-                <ul className='h-60 bg-black overflow-y-scroll py-5 border-2 border-gray-700 no-scrollbar'>
+                <ul className="h-60 bg-black overflow-y-scroll py-5 border-2 border-gray-700 no-scrollbar">
                   {chapters.map((chapter, index) => (
-                    <li key={index}><ChapterListItem chapter={chapter.name} url={chapter.thumbnail} series={series} 
-                    chapterId={chapter.id}/></li>
+                    <li key={index}>
+                      <ChapterListItem
+                        chapter={chapter.name}
+                        url={chapter.thumbnail}
+                        series={series}
+                        chapterId={chapter.id}
+                      />
+                    </li>
                   ))}
                 </ul>
               ) : (
@@ -96,7 +125,7 @@ export default function RightSidebar({ mangaId,series }: { mangaId: string,serie
             </section>
           </div>
         ) : (
-          <div className='w-full h-screen fixed right-0'>Loading...</div>
+          <div className="w-full h-screen fixed right-0">Loading...</div>
         )}
       </div>
     </div>
