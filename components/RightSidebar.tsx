@@ -4,8 +4,6 @@ import Link from 'next/link';
 import AddCollectionButton from './AddCollectionButton';
 import { getById, getChapterList } from '@/lib/fetch';
 import ChapterListItem from './chapter-list-item';
-// ... (your imports)
-// import necessary modules and components
 
 export default function RightSidebar({ mangaId,series }: { mangaId: string,series:string }) {
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
@@ -34,7 +32,7 @@ export default function RightSidebar({ mangaId,series }: { mangaId: string,serie
   };
 
   return (
-    <div className="border-l-2 border-l-slate-700 w-full h-screen">
+    <div className="bg-gray-700/50 w-full ">
       <div className=''> 
         {data ? (
           <div className=' py-5 no-scrollbar w-100  p-5'>
@@ -53,7 +51,7 @@ export default function RightSidebar({ mangaId,series }: { mangaId: string,serie
               {data.url ? <img src={data.url} alt="title-thumbnail" width={64} height={64} /> : null}
             </div>
 
-            <h3 className="font-extrabold m-auto  text-black  bg-gray-50   text-center mt-5  px-1">{data.name}</h3>
+            <h3 className="font-extrabold m-auto text-xl   text-center mt-5  px-1 w-1/2">{data.name}</h3>
 
            
             <h3 className=" font-bold text-black  bg-cyan-600 mt-5  shadow-lg px-1 hover:underline flex justify-between cursor-pointer w-fit">

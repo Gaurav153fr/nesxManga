@@ -35,7 +35,7 @@ async function getById(mangaId:string) {
     const dataObj:infoData ={
     id:data.id,
     name:data.title,
-    url:mediaUrl+data.thumbSize.small,
+    url:mediaUrl+data.thumbSize.medium,
     synopsis:data.story,
 slug:data.slug,
 status:data.status,

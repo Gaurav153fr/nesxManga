@@ -38,9 +38,9 @@ export default function AddCollectionButton({ id, imgUrl, link }: { id: string; 
     <div>
      
         {isAdded ? 
-      <PButton onClick={handleClick} text="- Remove" variant="secondary"/>
+      <PButton onClick={handleClick} text="⛔" variant="secondary"/>
       :
-      <PButton onClick={handleClick} text="+ Add to Fav" />}
+      <PButton onClick={handleClick} text="+ 💌" />}
 
     </div>
   );

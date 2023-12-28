@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import LeftSideBar from '@/components/home-route/left-sidebar/left-sidebar-container'
+import BackForth from '@/components/back-forth'
 const inter = Poppins({ subsets: ['latin'] ,weight:"400"})
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -10,22 +11,24 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children
+  children,details,serieslist
 }: {
   children: React.ReactNode,
   details:React.ReactNode,
-  home:React.ReactNode,
+  serieslist:React.ReactNode,
 }) {
   
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className='flex w-full   '>
-          <div className='w-20 h-screen'>
-        <LeftSideBar/></div>
         <section className=" flex w-full  ">
-       
-        {children}
+        <div className='bg-[#1e1f22] border-r-2 border-gray-600 w-20'><LeftSideBar/></div>
+       <div className='w-3/5  h-screen'><BackForth/>{serieslist}</div>
+       <div className='w-80   sm:h-screen h-fit right-0 fixed bottom-0 ml-10 '>
+        {details}
+       </div>
+        
         </section>
         
         

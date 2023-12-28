@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import SideBarItem from './left-sidebar-fav-item';
-import Link from 'next/link';
 interface CollectionDataType {
   imgUrl: string;
   link: string;
@@ -38,13 +37,12 @@ export default function LeftSideBar(): JSX.Element {
   };
 
   return (
-    <div className='pr-1  py-5 bg-[#1e1f22] border-r-2 border-gray-600 h-screen fixed'>
-      <Link className='bg-cyan-600 px-1 hover:underline' href="/home">/Home</Link>
+    <div className='  h-screen fixed overflow-y-scroll no-scrollbar'>
       {collection.map((item, index) => (
         <SideBarItem
           key={index}
           imgUrl={item.imgUrl}
-          link={"/home/"+item.link}
+          link={item.link}
           isActive={index === activeIndex}
           onClick={() => handleItemClick(index)} // Pass a click handler to update activeIndex
         />
